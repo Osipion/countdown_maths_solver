@@ -1,0 +1,116 @@
+﻿The formula for the number of options in a single frame is:
+	o = (n * (n - 1)) * t
+
+Where n is the size of the frame, and t the number of operations
+
+The total number of possible frames, is
+
+	f = n - 1;
+
+Because at each stage the frame size decreases by 1, until we reach 1, where it can decrease no further.
+
+A path is the route taken:
+
+	for frame in 0..(f-1), take from 1..(n - frame), 1..((n- frame) - 1), op(1..t)
+ 
+So a PathStep would be:
+
+	class PathStep
+	{
+		int frame;
+		int first_index;
+		int second_index;
+		int operation;
+	}
+
+And a Path:
+
+	class Path
+	{
+		Queue<PathStep> Steps;
+	}
+
+For each frame in 1..f, I need to generate all possible path steps:
+
+for(frame in frames)
+{
+	for(i in 1..n)
+	{
+		for(j in 1..(n -1))
+		{
+			for(t in 1..4)
+			{
+				new PathStep(frame = frame, first_index = i, second_index = j, operation = t)
+			}
+		}
+	}
+}
+
+t = 4
+
+ n |n-1|t | n = ?
+ 1 |1  |1 | 6
+ 1 |1  |1 | 5
+ 1 |1  |1 | 4
+ 1 |1  |1 | 3
+ 1 |1  |1 | 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 1,1,2 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 1,1,3 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 1,1,4 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 2,1,1 - n = 2 (second choice can only ever be 1 (n - 1)
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 2,1,2 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 2,1,3 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,1 - n = 3
+ 2,1,4 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,2 - n = 3
+ 1,1,1 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,2 - n = 3
+ 1,1,2 - n = 2
+
+ 1,1,1 - n = 6
+ 1,1,1 - n = 5
+ 1,1,1 - n = 4
+ 1,1,2 - n = 3
+ 1,1,3 - n = 2
