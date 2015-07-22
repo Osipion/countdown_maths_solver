@@ -111,7 +111,7 @@ namespace CountdownPlayer
              *     numbers will not divide equally, and so are invalid
              * 
              * Each frame is one option smaller than the last, so
-             *  ((n * (n - 1)) * t) * (((n - 1) * (n - 2)) * t) = number of choices in two succesive frames (where n > 2)
+             *  ((n * (n - 1)) * t) * (((n - 1) * (n - 2)) * t) = number of choices in two succesive frames (where n > 3)
              * 
              */
 
